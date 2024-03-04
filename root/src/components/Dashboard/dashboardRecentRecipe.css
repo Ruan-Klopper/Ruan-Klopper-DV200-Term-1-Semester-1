@@ -1,0 +1,74 @@
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+.dashCard {
+  height: auto;
+  width: 95%;
+  background-color: #f2d249;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+
+  /* Shadow inner */
+  box-shadow: -1px -18px 13px -21px rgba(0, 0, 0, 0.75) inset;
+  -webkit-box-shadow: -1px -18px 13px -21px rgba(0, 0, 0, 0.75) inset;
+  -moz-box-shadow: -1px -18px 13px -21px rgba(0, 0, 0, 0.75) inset;
+
+  /* Shadow outer */
+  box-shadow: 1px 3px 23px -1px rgba(0, 0, 0, 0.41);
+  -webkit-box-shadow: 1px 3px 23px -1px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: 1px 3px 23px -1px rgba(0, 0, 0, 0.41);
+}
+
+.dcTextGroup {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  margin-top: -20px;
+}
+
+.dcPhoto {
+  width: 100%;
+  height: 130px;
+  background-image: url(../../assets/background/dashboardSampleBackground.png);
+  border-radius: 15px 15px 0px 0px;
+  background-size: cover;
+}
+
+.dcPhotoOverlay {
+  width: 100%;
+  height: 130px;
+  border-radius: 15px 15px 0px 0px;
+
+  background: rgb(242, 210, 73);
+  background: linear-gradient(
+    8deg,
+    rgba(242, 210, 73, 1) 28%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  box-shadow: -1px 22px 13px -21px rgba(255, 255, 255, 0.75) inset;
+  -webkit-box-shadow: -1px 22px 13px -21px rgba(255, 255, 255, 0.75) inset;
+  -moz-box-shadow: -1px 22px 13px -21px rgba(255, 255, 255, 0.75) inset;
+}
+
+#dcRecipeName {
+  margin-top: -5px;
+}
+
+/* Media queries for different device sizes */
+@media (min-width: 1024px) {
+  /* desktop */
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  /* tablet */
+}
+
+@media (max-width: 767px) {
+  /* mobile */
+}

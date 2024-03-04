@@ -1,0 +1,58 @@
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+.dashboardGroup {
+  background-color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 13px;
+  padding-bottom: 3px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.dashItems {
+  background-color: white;
+  margin: 0 auto;
+}
+
+/* Media queries for different device sizes */
+@media (min-width: 1920px) {
+  /* desktop */
+  .dashboardGroup {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1919px) and (min-width: 1280px) {
+  /* desktop */
+  .dashboardGroup {
+    width: 55%;
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  /* desktop */
+  .dashboardGroup {
+    width: 70%;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  /* tablet */
+  .dashboardGroup {
+    width: 75%;
+  }
+}
+
+@media (max-width: 767px) {
+  /* mobile */
+  .dashboardGroup {
+    width: 90%;
+  }
+}

@@ -1,0 +1,50 @@
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+.website {
+  background-color: #f2d249;
+}
+
+html {
+  background-color: #f2d249;
+}
+
+h1,
+h2,
+h3 {
+  /* Lobster */
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h4,
+h5,
+h6,
+p,
+a {
+  /* Yanone Kaffeesatz
+  <uniquifier>: Use a unique and descriptive class name
+  <weight>: Use a value from 200 to 700 */
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* Media queries for different device sizes */
+@media (min-width: 1024px) {
+  /* desktop */
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  /* tablet */
+}
+
+@media (max-width: 767px) {
+  /* mobile */
+}

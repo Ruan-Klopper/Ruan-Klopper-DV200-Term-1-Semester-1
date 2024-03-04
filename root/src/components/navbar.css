@@ -1,0 +1,47 @@
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+.navbar {
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.navLeft {
+  width: auto;
+  height: 40px;
+  background-color: rgba(242, 210, 73, 0.8);
+  margin-left: 20px;
+  padding-top: 3px;
+  padding-left: 18px;
+  padding-right: 10px;
+  border-radius: 15px;
+  float: left;
+  display: flex;
+  align-items: center;
+
+  /* Inner and outer shadows */
+  box-shadow: 1px 4px 15px -1px rgba(255, 255, 255, 0.58) inset,
+    1px 3px 23px -1px rgba(0, 0, 0, 0.41);
+  -webkit-box-shadow: 1px 4px 15px -1px rgba(255, 255, 255, 0.58) inset,
+    1px 3px 23px -1px rgba(0, 0, 0, 0.41);
+  -moz-box-shadow: 1px 4px 15px -1px rgba(255, 255, 255, 0.58) inset,
+    1px 3px 23px -1px rgba(0, 0, 0, 0.41);
+}
+
+#navbar-nav {
+  width: 185px;
+  background-color: blue;
+  float: left; /* Align the navbar links to the left */
+}
+.navLeft .navbar-brand {
+  margin-right: auto; /* Pushes the brand/logo to the left */
+}
+
+.navbar-nav {
+  display: flex;
+  list-style: none; /* Remove default list styles */
+}
