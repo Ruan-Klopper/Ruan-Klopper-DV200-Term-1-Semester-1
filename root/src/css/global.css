@@ -16,14 +16,14 @@ html {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   /* Lobster */
   font-family: "Lobster", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
-h4,
 h5,
 h6,
 p,
@@ -34,6 +34,14 @@ a {
   font-family: "Yanone Kaffeesatz", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+p {
+  line-height: 100%;
+}
+
+.website {
+  padding-top: 130px;
 }
 
 /* Media queries for different device sizes */
@@ -47,4 +55,36 @@ a {
 
 @media (max-width: 767px) {
   /* mobile */
+}
+
+.btnYellow {
+  height: 35px;
+  background-color: #f2d249 !important;
+  color: #b42828 !important;
+  border-radius: 10px !important;
+
+  /* font */
+  font-family: "Yanone Kaffeesatz", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-style: normal !important;
+
+  /* Shadow */
+  box-shadow: inset 0px -7px 14px -11px rgba(0, 0, 0, 0.75),
+    inset 0px 7px 14px -3px rgba(255, 255, 255, 0.75);
+}
+
+.btnRed {
+  height: 35px;
+  background-color: #b42828 !important;
+  color: #f2d249 !important;
+  border-radius: 10px !important;
+
+  /* font */
+  font-family: "Yanone Kaffeesatz", sans-serif !important;
+  font-optical-sizing: auto !important;
+  font-style: normal !important;
+
+  /* Shadow */
+  box-shadow: inset 0px -7px 14px -11px rgba(0, 0, 0, 0.75),
+    inset 0px 7px 14px -3px rgb(255, 97, 97);
 }

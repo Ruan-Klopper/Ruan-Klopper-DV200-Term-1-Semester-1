@@ -1,0 +1,86 @@
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+@media (min-width: 1920px) {
+  /* desktop */
+}
+
+@media (max-width: 1919px) and (min-width: 1280px) {
+  /* desktop */
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  /* desktop */
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  /* tablet */
+}
+
+@media (max-width: 767px) {
+  /* mobile */
+}
+
+.compCard {
+  width: 350px;
+  background-color: white;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 30px;
+}
+
+.compMainDishPhoto {
+  width: 100%;
+  height: 130px;
+  background-image: url("../../assets/background/dashboardSampleBackground.png");
+  background-size: cover;
+  border-radius: 10px;
+
+  /* Shadow */
+  box-shadow: inset 0px -7px 14px -11px rgba(0, 0, 0, 1),
+    inset 0px 7px 14px -3px rgb(255, 255, 255);
+}
+
+.scoreGummy {
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 10px;
+  padding-top: 15px;
+
+  /* shadow */
+  -webkit-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.45),
+    inset 0px -5px 26px -10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.45),
+    inset 0px -5px 26px -10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 13px 0px rgba(0, 0, 0, 0.45),
+    inset 0px -5px 26px -10px rgba(0, 0, 0, 0.209);
+}
+
+/* style={{ width: "300px", height: "200px", overflowY: "auto" }} */
+
+.compCardFrame {
+  width: 300px;
+  height: 320px;
+  background-color: #ededed;
+  overflow-y: auto;
+  border-radius: 18px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  /* Shadow */
+  -webkit-box-shadow: inset 0px 0px 16px -4px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: inset 0px 0px 16px -4px rgba(0, 0, 0, 0.63);
+  box-shadow: inset 0px 0px 16px -4px rgba(0, 0, 0, 0.63);
+}

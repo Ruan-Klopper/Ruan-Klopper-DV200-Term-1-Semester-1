@@ -1,0 +1,81 @@
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+.compBgElem {
+  background-image: url("../assets/background/backgroundElement.svg");
+  background-size: cover;
+  margin-top: -130px;
+}
+
+/* Media queries for different device sizes */
+@media (min-width: 1920px) {
+  /* desktop */
+  .compBgElem {
+    width: 700px;
+    height: 700px;
+    margin-bottom: -700px;
+  }
+}
+
+@media (max-width: 1919px) and (min-width: 1280px) {
+  /* desktop */
+  .compBgElem {
+    width: 600px;
+    height: 600px;
+    margin-bottom: -600px;
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  /* desktop */
+  .compBgElem {
+    width: 550px;
+    height: 550px;
+    margin-bottom: -550px;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  /* tablet */
+  .compBgElem {
+    width: 500px;
+    height: 500px;
+    margin-bottom: -500px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* mobile */
+  .compBgElem {
+    width: 300px;
+    height: 300px;
+    margin-bottom: -300px;
+  }
+}
+
+.compareTopTitle {
+  width: auto;
+  height: 100px;
+  margin-left: 5%;
+  margin-top: 4%;
+}
+
+.compLine {
+  float: left;
+  width: 5px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #b42828;
+}
+
+.compLineTitle {
+  float: left;
+  margin-left: 10px;
+  margin-top: -5px;
+  color: #b42828;
+}

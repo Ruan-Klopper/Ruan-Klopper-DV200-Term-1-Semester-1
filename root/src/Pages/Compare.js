@@ -12,12 +12,30 @@ import Col from "react-bootstrap/Col";
 // Custom compoments
 import NavBar from "../components/navbar";
 
+import CompareControls from "../components/Compare/compareControls";
+
 const Compare = () => {
   return (
-    <div>
-      <NavBar />
+    <div class="website">
+      <div className="compBgElem"></div>
+      <div style={{ marginBottom: "80px" }}></div>
+      <NavBar webPage={"Compare"} />
+      <div className="container">
+        {/* Title */}
+        <div className="row">
+          <div className="compareTopTitle">
+            <div className="compLine"></div>
+            <div className="compLineTitle">
+              <h1>Compare</h1>
+            </div>
+          </div>
+        </div>
 
-      <h1>This is the Compare page</h1>
+        {/* Compare cards */}
+        <div className="row">
+          <CompareControls />
+        </div>
+      </div>
     </div>
   );
 };

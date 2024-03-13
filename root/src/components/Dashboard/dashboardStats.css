@@ -1,0 +1,19 @@
+/* dashboardStats.css */
+
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+.dashStatsBox {
+  width: 95%;
+  height: auto;
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}

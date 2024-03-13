@@ -5,9 +5,17 @@
 
 /* FONTS: */
 @import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
 .navbar {
   margin-top: 5px;
   margin-bottom: 25px;
+}
+
+.navbar-fixed {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 .navLeft {
@@ -32,16 +40,35 @@
     1px 3px 23px -1px rgba(0, 0, 0, 0.41);
 }
 
-#navbar-nav {
-  width: 185px;
-  background-color: blue;
-  float: left; /* Align the navbar links to the left */
-}
 .navLeft .navbar-brand {
-  margin-right: auto; /* Pushes the brand/logo to the left */
+  margin-right: 15px;
+  float: left;
+}
+
+.navDot {
+  width: 5px;
+  height: 5px;
+  background-color: #b42828;
+  float: left;
+  margin-right: 15px;
+  border-radius: 3px;
 }
 
 .navbar-nav {
   display: flex;
   list-style: none; /* Remove default list styles */
+}
+
+.nav-link {
+  color: #b42828;
+  margin-left: -4px;
+}
+
+.nav-link:hover {
+  color: #e27209 !important;
+  font-weight: bold;
+}
+
+.active {
+  font-weight: bold;
 }

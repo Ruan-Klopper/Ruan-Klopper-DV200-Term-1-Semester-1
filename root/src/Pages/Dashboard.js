@@ -15,11 +15,15 @@ import Col from "react-bootstrap/Col";
 import NavBar from "../components/navbar";
 import DashRecentRecipe from "../components/Dashboard/dashboardRecentRecipe";
 import DashSavedRecipe from "../components/Dashboard/dashboardSavedRecipes";
+import DashStats from "../components/Dashboard/dashboardStats";
+import BarChart from "../components/charts/barChart";
+import LineChart from "../components/charts/lineChart";
+import PieChart from "../components/charts/pieChart";
 
 const Dashboard = () => {
   return (
     <div class="website">
-      <NavBar />
+      <NavBar webPage={"Dashboard"} />
 
       <div class="dashboardGroup">
         <h2 style={{ fontSize: "30px" }}>Your dashboard</h2>
@@ -27,23 +31,17 @@ const Dashboard = () => {
         <div class="row">
           <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
             <h3>Recipe - Food</h3>
-            <p style={{ lineHeight: "100%" }}>
-              The spoonacular Recipe - Food - Nutrition API gives you to access
-              to thousands of recipes, storebought packaged foods, and chain
-              restaurant menu items. Our food ontology and semantic recipe
-              search engine makes it possible to search for recipes using
-              natural language queries, such as “gluten free brownies without
-              sugar” or “low fat vegan cupcakes.” You can automatically
-              calculate the nutritional information for any recipe, estimate
-              recipe costs, visualize ingredient lists, find recipes for what’s
-              in your fridge, find recipes based on special diets, nutritional
-              requirements, or favorite ingredients, classify recipes into types
-              and cuisines, convert ingredient amounts, or even compute an
-              entire meal plan. With our powerful API, you can create many kinds
-              of food and nutrition apps. Special diets/dietary requirements
-              currently available include: vegan, vegetarian, pescetarian,
-              gluten free, grain free, dairy free, high protein, low sodium, low
-              carb, Paleo, Primal, ketogenic, and more.
+            <p>
+              The spoonacular Recipe - Food - Nutrition API offers access to a
+              vast array of recipes, packaged foods, and restaurant menu items.
+              Its advanced food ontology and semantic recipe search engine allow
+              for natural language queries, such as "gluten-free brownies
+              without sugar" or "low-fat vegan cupcakes." Users can calculate
+              nutritional information, estimate costs, visualize ingredients,
+              find recipes based on dietary preferences or ingredients on hand,
+              and more. The API supports various special diets, including vegan,
+              vegetarian, gluten-free, and ketogenic, among others, enabling the
+              creation of diverse food and nutrition apps.
             </p>
             <a href="google.com">Go to API</a>
           </div>
@@ -52,6 +50,18 @@ const Dashboard = () => {
           </div>
           <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
             <DashSavedRecipe />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
+            <DashStats chart={<BarChart />} />
+          </div>
+          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
+            <DashStats chart={<PieChart />} />
+          </div>
+          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
+            <DashStats chart={<LineChart />} />
           </div>
         </div>
       </div>

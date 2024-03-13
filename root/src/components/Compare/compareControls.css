@@ -1,0 +1,25 @@
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+.controlBody {
+  width: 220px;
+  height: auto;
+  background-color: #e27209;
+  border-radius: 15px;
+  padding: 15px;
+  padding-left: 20px;
+
+  /* shadow */
+  -webkit-box-shadow: inset 0px 0px 15px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px 0px 15px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px 0px 15px -4px rgba(0, 0, 0, 0.75);
+}
+
+#compareCardContainer {
+  margin-top: 50px;
+}

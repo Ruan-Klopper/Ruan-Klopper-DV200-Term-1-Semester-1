@@ -3,6 +3,7 @@ import React from "react";
 
 // CSS
 import "../css/global.css";
+import "../css/Compare.css";
 
 // Bootstrap compoments
 import Container from "react-bootstrap/Container";
@@ -14,8 +15,8 @@ import NavBar from "../components/navbar";
 
 const Timeline = () => {
   return (
-    <div>
-      <NavBar />
+    <div class="website">
+      <NavBar webPage={"Timeline"} />
       <h1>This is the timeline page</h1>
     </div>
   );
