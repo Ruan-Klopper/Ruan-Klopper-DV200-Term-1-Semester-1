@@ -1,5 +1,7 @@
 // compareCards.js
-import React from "react";
+import React, { useRef, useState } from "react";
+import axios from "axios";
+import ReactDOM from "react-dom";
 
 // CSS
 import "./compareCard.css";
@@ -11,17 +13,111 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 // Custom compoments
-import RecipeDetails from "./compareRecipeDetails";
+import CompareResults from "./compareResults";
 
-const CompareCard = ({ recipeNo }) => {
-  // recipeNo
+const LoadingElement = () => {
+  return (
+    <div>
+      <h6 style={{ textAlign: "center" }}>Loading</h6>
+    </div>
+  );
+};
 
-  // recipeData array structure
-  // property name - dataset - which ID tag it goes to
-  // API Call: Search Recipes
-  // readyInMinutes - int - #readyInTime
-  // title - string - #recipeTitle
-  // imageUrls - string - #recipePhoto
+// Define NotFoundElement component
+const NotFoundElement = () => {
+  return (
+    <div>
+      <h6 style={{ textAlign: "center" }}>Error finding your search</h6>
+    </div>
+  );
+};
+
+const DeafultElement = () => {
+  return (
+    <div>
+      <h6 style={{ textAlign: "center" }}>Please search for an item</h6>
+    </div>
+  );
+};
+// Do not use reactDom, use react create root
+const CompareCard = () => {
+  const APIKEY = "7a92345447mshd0df87618117100p1469ddjsn05b06500b351";
+
+  let success = false;
+  let counter = 0;
+
+  const [allRecipes, setAllRecipes] = useState([]);
+
+  async function getRecipeDetailsByName(recipeName, calls) {
+    const options = {
+      method: "GET",
+      url: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search",
+      params: {
+        query: recipeName,
+        number: 3,
+        ranking: "2",
+      },
+      headers: {
+        "X-RapidAPI-Key": "7a92345447mshd0df87618117100p1469ddjsn05b06500b351",
+        "X-RapidAPI-Host":
+          "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+      },
+    };
+
+    success = false;
+    try {
+      const response = await axios.request(options);
+      const output = response.data.results.map((element) => ({
+        id: element.id,
+        title: element.title,
+        imageUrl: element.image,
+        readyInMinutes: element.readyInMinutes,
+      }));
+
+      // If API call is successfull then register as success
+      success = true;
+
+      // initiate the allRecipes array
+      setAllRecipes(output);
+    } catch (error) {
+      console.log("ERROR");
+      console.error(error);
+      success = false;
+    }
+  }
+
+  const recipeDetailsContainerRef = useRef(null);
+
+  const loadRecipes = async () => {
+    const recipeName = document.getElementById("recipeNameSearch").value;
+
+    recipeDetailsContainerRef.current.innerHTML = "";
+    ReactDOM.render(<LoadingElement />, recipeDetailsContainerRef.current);
+
+    await getRecipeDetailsByName(recipeName, 3);
+    console.log("Is the API call successful?\n" + success);
+    console.log("All recipes output\n", allRecipes);
+
+    if (success && allRecipes.length > 0) {
+      counter = 0; // Counter is for the previous and next thingies
+      const firstRecipe = allRecipes[0];
+      console.log("First recipe:", firstRecipe);
+
+      ReactDOM.render(
+        <CompareResults
+          key={firstRecipe.id}
+          recipeID={firstRecipe.id}
+          recipeTitle={firstRecipe.title}
+          recipeImage={firstRecipe.imageUrl}
+          recipeTime={firstRecipe.readyInMinutes}
+        />,
+        recipeDetailsContainerRef.current
+      );
+    } else {
+      console.log("No recipes found or API call failed.");
+      ReactDOM.render(<NotFoundElement />, recipeDetailsContainerRef.current);
+    }
+  };
 
   return (
     <div className="compCard">
@@ -39,23 +135,25 @@ const CompareCard = ({ recipeNo }) => {
           </div>
           <div className="col-12">
             {/* Search box with button */}
-            <div class="input-group input-group-sm mb-3">
+            <div className="input-group input-group-sm mb-3">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 aria-label="Small"
                 aria-describedby="inputGroup-sizing-sm"
-              ></input>
-              <div class="input-group-append">
+                id="recipeNameSearch"
+              />
+              <div className="input-group-append">
                 <button
-                  class="btn btnYellow"
+                  className="btn btnYellow"
                   type="button"
                   style={{ marginLeft: "8px" }}
+                  onClick={loadRecipes}
                 >
                   Search
                 </button>
                 <button
-                  class="btn btnRed"
+                  className="btn btnRed"
                   type="button"
                   style={{ marginLeft: "8px" }}
                 >
@@ -64,57 +162,21 @@ const CompareCard = ({ recipeNo }) => {
               </div>
             </div>
           </div>
-          <div className="col-12">
-            <h5 style={{ float: "left", marginTop: "8px" }}>
-              <strong>Search results:</strong>
-            </h5>
-            <button
-              class="btn btnRed"
-              type="button"
-              style={{ marginLeft: "5px", float: "right" }}
-            >
-              Previous
-            </button>
-            <button
-              class="btn btnRed"
-              type="button"
-              style={{ marginLeft: "5px", float: "right" }}
-            >
-              Next
-            </button>
-          </div>
+
+          {/* Search results controls, only append when the API call is successful */}
+          {/* Results: */}
+          {/* Title and photo */}
         </div>
 
-        {/* Results: */}
-        {/* Title and photo */}
+        {/* Results */}
         <div
           className="row"
-          style={{ marginTop: "20px", marginBottom: "20px" }}
+          style={{ marginTop: "20px" }}
+          id="recipeDetailsContainer"
+          ref={recipeDetailsContainerRef}
         >
-          <div className="col-7">
-            {/* readyInMinutes */}
-            <h6 style={{ marginBottom: "5px" }} id="readyInTime">
-              Ready in time
-            </h6>
-            {/* title */}
-            <h3 id="recipeTitle">Eggs and bullybeef</h3>
-            <button
-              class="btn btnYellow"
-              type="button"
-              style={{ marginTop: "8px" }}
-            >
-              View details
-            </button>
-          </div>
-          <div className="col-5">
-            {/* Recipe photo appear here */}
-            <div className="compRecipePhoto" id="recipePhoto"></div>
-          </div>
+          <DeafultElement />
         </div>
-
-        {/* Recipe deep information - will appear when a user clicks the view button */}
-        {/* Recipe description */}
-        <RecipeDetails id={245} />
       </div>
     </div>
   );
