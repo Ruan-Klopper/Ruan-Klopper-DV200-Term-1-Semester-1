@@ -27,6 +27,25 @@
   /* mobile */
 }
 
+.loadingGif {
+  width: 100px;
+  height: 100px;
+  background-image: url("../../assets/loading-gif.gif");
+  background-size: cover;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.errorGif {
+  width: 100px;
+  height: 93px;
+  background-image: url("../../assets/error-gif.gif");
+  background-size: cover;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 9px;
+}
+
 .compCard {
   width: 350px;
   background-color: white;
@@ -39,15 +58,39 @@
   border-radius: 30px;
 }
 
-.compRecipePhoto {
-  width: 125px;
-  height: 140px;
-  background-size: cover;
-  border-radius: 10px;
+/* compareResults */
 
-  /* Shadow */
-  box-shadow: inset 0px -7px 14px -11px rgba(0, 0, 0, 1),
-    inset 0px 7px 14px -3px rgb(255, 255, 255);
+.recipeDetailsBlob {
+  width: 100%;
+  height: 250px;
+  background-color: #f2d249;
+  margin-left: 11px;
+  border-radius: 25px;
+}
+
+.compareRecipePhotoOverlay {
+  width: 250px;
+  height: 250px;
+  margin-left: 38px;
+  margin-bottom: -250px;
+  background-size: cover;
+
+  border-radius: 0px 25px 25px 0px;
+}
+
+.compareRecipePhotoOverlayOverlay {
+  width: 250px;
+  height: 250px;
+  margin-left: 38px;
+  margin-bottom: -250px;
+
+  border-radius: 0px 25px 25px 0px;
+  background: rgb(242, 210, 73);
+  background: linear-gradient(
+    100deg,
+    rgba(242, 210, 73, 1) 20%,
+    rgba(242, 210, 73, 0.1) 100%
+  );
 }
 
 .scoreGummy {

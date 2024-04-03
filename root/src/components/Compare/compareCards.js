@@ -7,27 +7,53 @@ import ReactDOM from "react-dom";
 import "./compareCard.css";
 import "../../css/global.css";
 
-// Bootstrap compoments
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 // Custom compoments
 import CompareResults from "./compareResults";
 
-const LoadingElement = () => {
+const SearchControls = ({ count, total, loadPrev, loadNext }) => {
+  // Receive loadPrev and loadNext as props
   return (
-    <div>
-      <h6 style={{ textAlign: "center" }}>Loading</h6>
+    /* Search results controls, only append when the API call is successful */
+    <div className="col-12">
+      <h5 style={{ float: "left", marginTop: "8px" }}>
+        <strong>
+          Search results: {count + 1}/{total}{" "}
+        </strong>
+      </h5>
+      <button
+        className="btn btnRed" // Corrected class attribute name
+        type="button"
+        style={{ marginLeft: "5px", float: "right" }}
+        onClick={loadNext} // Call loadNext directly without parentheses
+      >
+        Next
+      </button>
+      <button
+        className="btn btnRed" // Corrected class attribute name
+        type="button"
+        style={{ marginLeft: "5px", float: "right" }}
+        onClick={loadPrev} // Call loadPrev directly without parentheses
+      >
+        Previous
+      </button>
     </div>
   );
 };
 
-// Define NotFoundElement component
-const NotFoundElement = () => {
+const LoadingElement = () => {
   return (
     <div>
-      <h6 style={{ textAlign: "center" }}>Error finding your search</h6>
+      <div className="loadingGif"></div>
+      <h6 style={{ textAlign: "center" }}>Loading...</h6>
+    </div>
+  );
+};
+
+const NotFoundElement = ({ errorMessage }) => {
+  return (
+    <div>
+      <div className="errorGif"></div>
+      <h6 style={{ textAlign: "center" }}>{errorMessage}</h6>
     </div>
   );
 };
@@ -39,14 +65,20 @@ const DeafultElement = () => {
     </div>
   );
 };
-// Do not use reactDom, use react create root
+
 const CompareCard = () => {
   const APIKEY = "7a92345447mshd0df87618117100p1469ddjsn05b06500b351";
 
-  let success = false;
-  let counter = 0;
-
+  const [recipeName, setRecipeName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [hasRecipes, setHasRecipes] = useState(false);
   const [allRecipes, setAllRecipes] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
+  const [errorCode, setErrorCode] = useState("");
+
+  let success = false;
 
   async function getRecipeDetailsByName(recipeName, calls) {
     const options = {
@@ -54,7 +86,7 @@ const CompareCard = () => {
       url: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search",
       params: {
         query: recipeName,
-        number: 3,
+        number: calls,
         ranking: "2",
       },
       headers: {
@@ -64,59 +96,71 @@ const CompareCard = () => {
       },
     };
 
-    success = false;
     try {
       const response = await axios.request(options);
-      const output = response.data.results.map((element) => ({
+      const fetchedRecipes = response.data.results.map((element) => ({
         id: element.id,
         title: element.title,
         imageUrl: element.image,
         readyInMinutes: element.readyInMinutes,
       }));
 
-      // If API call is successfull then register as success
+      // Save recipes to ALLRECIPES ARRAY
+      console.log("API OUTPUT:");
+      console.log(fetchedRecipes);
+      setAllRecipes(await fetchedRecipes);
       success = true;
-
-      // initiate the allRecipes array
-      setAllRecipes(output);
     } catch (error) {
-      console.log("ERROR");
-      console.error(error);
+      console.error("ERROR: " + error);
       success = false;
+      setErrorCode("Seems like we can't find that recipe - Error code:", error);
     }
   }
 
-  const recipeDetailsContainerRef = useRef(null);
-
   const loadRecipes = async () => {
-    const recipeName = document.getElementById("recipeNameSearch").value;
+    // State for loading
+    setIsLoading(true);
+    setHasRecipes(false);
+    setHasError(false);
 
-    recipeDetailsContainerRef.current.innerHTML = "";
-    ReactDOM.render(<LoadingElement />, recipeDetailsContainerRef.current);
+    setAllRecipes([]);
+    await getRecipeDetailsByName(recipeName, 10);
 
-    await getRecipeDetailsByName(recipeName, 3);
+    console.log("Recipe name trying to seach for:" + recipeName);
     console.log("Is the API call successful?\n" + success);
     console.log("All recipes output\n", allRecipes);
 
-    if (success && allRecipes.length > 0) {
-      counter = 0; // Counter is for the previous and next thingies
-      const firstRecipe = allRecipes[0];
-      console.log("First recipe:", firstRecipe);
+    if (allRecipes.length > 0) {
+      // Load recipes
+      setCounter(0);
+      setTotalCount(allRecipes.length);
 
-      ReactDOM.render(
-        <CompareResults
-          key={firstRecipe.id}
-          recipeID={firstRecipe.id}
-          recipeTitle={firstRecipe.title}
-          recipeImage={firstRecipe.imageUrl}
-          recipeTime={firstRecipe.readyInMinutes}
-        />,
-        recipeDetailsContainerRef.current
-      );
+      // State for adding a recipe element
+      setIsLoading(false);
+      setHasRecipes(true);
+      setHasError(false);
     } else {
-      console.log("No recipes found or API call failed.");
-      ReactDOM.render(<NotFoundElement />, recipeDetailsContainerRef.current);
+      setErrorCode(
+        "Seems like we can't find that recipe - Try again, if it does not work then the Recipe not found - What caused it? Nothing recieved from the array :("
+      );
+      setIsLoading(false);
+      setHasRecipes(false);
+      setHasError(true);
     }
+  };
+
+  const loadNext = () => {
+    setCounter((prevCounter) => (prevCounter + 1) % totalCount);
+    setIsLoading(false);
+    setHasRecipes(true);
+    setHasError(false);
+  };
+
+  const loadPrev = () => {
+    setCounter((prevCounter) => (prevCounter - 1 + totalCount) % totalCount);
+    setIsLoading(false);
+    setHasRecipes(true);
+    setHasError(false);
   };
 
   return (
@@ -142,6 +186,12 @@ const CompareCard = () => {
                 aria-label="Small"
                 aria-describedby="inputGroup-sizing-sm"
                 id="recipeNameSearch"
+                style={{
+                  borderColor: "#E27209",
+                  borderRadius: "10px",
+                }}
+                value={recipeName}
+                onChange={(e) => setRecipeName(e.target.value)}
               />
               <div className="input-group-append">
                 <button
@@ -162,20 +212,26 @@ const CompareCard = () => {
               </div>
             </div>
           </div>
-
-          {/* Search results controls, only append when the API call is successful */}
-          {/* Results: */}
-          {/* Title and photo */}
         </div>
 
         {/* Results */}
-        <div
-          className="row"
-          style={{ marginTop: "20px" }}
-          id="recipeDetailsContainer"
-          ref={recipeDetailsContainerRef}
-        >
-          <DeafultElement />
+        <div className="row" style={{ marginTop: "20px" }}>
+          {isLoading && <LoadingElement />}
+          {hasError && <NotFoundElement errorMessage={errorCode} />}
+          {hasRecipes && (
+            <>
+              <SearchControls
+                count={counter}
+                total={totalCount}
+                loadPrev={loadPrev} // Pass loadPrev as prop
+                loadNext={loadNext} // Pass loadNext as prop
+              />
+              <CompareResults
+                recipes={allRecipes[counter]} // Pass the retrieved recipes to CompareResults
+              />
+            </>
+          )}
+          {!isLoading && !hasError && !hasRecipes && <DeafultElement />}
         </div>
       </div>
     </div>
