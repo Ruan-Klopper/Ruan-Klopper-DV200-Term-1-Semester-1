@@ -7,22 +7,19 @@ import "./compareCard.css";
 import "../../css/global.css";
 
 // Bootstrap compoments
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
-// Custom compoments
 import IngredientItem from "./ingredientItem";
 import InstructionItem from "./InstructionItem";
+// Custom compoments
 
-const RecipeDetails = ({ id }) => {
-  const {
-    healthScore,
-    servings,
-    pricePerServing,
-    extendedIngredients,
-    analyzedInstructions,
-  } = id;
+const RecipeDetails = ({ recipeDeepDetails }) => {
+  const healthScore = recipeDeepDetails[0].healthScore;
+  const servings = recipeDeepDetails[0].servings;
+  const pricePerServing = recipeDeepDetails[0].pricePerServing;
+  const extendedIngredient = recipeDeepDetails[0].extendedIngredient;
+  const analyzedInstructionsSteps =
+    recipeDeepDetails[0].analyzedInstructions[0].steps;
+
+  console.log("analyzedInstructionsSteps:\n", analyzedInstructionsSteps);
 
   return (
     <div className="recipeDetails">
@@ -39,7 +36,7 @@ const RecipeDetails = ({ id }) => {
           style={{ backgroundColor: "#F2D249", color: "#E27209" }}
         >
           <p style={{ marginBottom: "2px" }}>Health score</p>
-          <h1 id="healthScoreNo">{healthScore}</h1>
+          <h1>{healthScore}</h1>
         </div>
 
         <div
@@ -47,7 +44,7 @@ const RecipeDetails = ({ id }) => {
           style={{ backgroundColor: "#E27209", color: "#F2D249" }}
         >
           <p style={{ marginBottom: "2px" }}>Servings</p>
-          <h1 id="servingsNo">{servings}</h1>
+          <h1>{servings}</h1>
         </div>
 
         <div
@@ -55,7 +52,7 @@ const RecipeDetails = ({ id }) => {
           style={{ backgroundColor: "#B42828", color: "#F2D249" }}
         >
           <p style={{ marginBottom: "2px" }}>Price per serving</p>
-          <h4 id="pricePerServingNo">{pricePerServing}</h4>
+          <h4>{pricePerServing}</h4>
         </div>
       </div>
 
@@ -77,10 +74,14 @@ const RecipeDetails = ({ id }) => {
         <h4>Ingredients:</h4>
         {/* Button */}
         <div className="col-12">
-          <div className="compCardFrame">
-            {/* Inside a frame with a fixed width and height */}
+          {/* Ingredient item container */}
+          <div className="compCardFrame" id="ingredientsContainer">
+            {extendedIngredient.map((ingredient, index) => (
+              <IngredientItem index={index} ingredient={ingredient} />
+            ))}
 
-            <p>The end</p>
+            <IngredientItem index={0} ingredient={extendedIngredient[0]} />
+            <p style={{ textAlign: "center", marginTop: "17px" }}>The end</p>
           </div>
         </div>
       </div>
@@ -88,10 +89,12 @@ const RecipeDetails = ({ id }) => {
       {/* Instructions */}
       <div className="row" style={{ marginTop: "10px", marginBottom: "5px" }}>
         <h4>Instructions:</h4>
-        {/* Button */}
         <div className="col-12">
           <div className="compCardFrame">
-            <p>The end</p>
+            {analyzedInstructionsSteps.map((instructionOutput, index) => (
+              <InstructionItem instruction={instructionOutput} />
+            ))}
+            <p style={{ textAlign: "center", marginTop: "17px" }}>The end</p>
           </div>
         </div>
       </div>

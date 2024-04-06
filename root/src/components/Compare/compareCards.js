@@ -141,7 +141,7 @@ const CompareCard = () => {
       setHasError(false);
     } else {
       setErrorCode(
-        "Seems like we can't find that recipe - Try again, if it does not work then the Recipe not found - What caused it? Nothing recieved from the array :("
+        "Seems like we can't find that recipe - Try again, if it does not work then the Recipe not found - What caused it? Nothing recieved from the API :("
       );
       setIsLoading(false);
       setHasRecipes(false);
