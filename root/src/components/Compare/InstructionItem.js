@@ -58,9 +58,6 @@ const InstructionItem = (instructionOutput) => {
   const number = instructionOutput.instruction.number;
   const steps = instructionOutput.instruction.step;
 
-  console.log("OUTPUT FOR INSTRUCTION ITEM: ", number);
-  console.log(instructionOutput);
-
   return (
     <div className="instructionBody container">
       <p

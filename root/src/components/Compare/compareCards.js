@@ -215,7 +215,7 @@ const CompareCard = () => {
         </div>
 
         {/* Results */}
-        <div className="row" style={{ marginTop: "20px" }}>
+        <div className="row">
           {isLoading && <LoadingElement />}
           {hasError && <NotFoundElement errorMessage={errorCode} />}
           {hasRecipes && (

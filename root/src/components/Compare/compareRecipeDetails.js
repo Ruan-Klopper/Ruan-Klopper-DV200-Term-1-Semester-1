@@ -6,20 +6,21 @@ import axios from "axios";
 import "./compareCard.css";
 import "../../css/global.css";
 
-// Bootstrap compoments
+// Custom compoments
 import IngredientItem from "./ingredientItem";
 import InstructionItem from "./InstructionItem";
-// Custom compoments
+import CompareTaste from "./compareTaste";
+import CompareNutrition from "./compareNutrition";
 
-const RecipeDetails = ({ recipeDeepDetails }) => {
+const RecipeDetails = ({ recipeDeepDetails, tasteArray, nutritionArray }) => {
   const healthScore = recipeDeepDetails[0].healthScore;
   const servings = recipeDeepDetails[0].servings;
   const pricePerServing = recipeDeepDetails[0].pricePerServing;
   const extendedIngredient = recipeDeepDetails[0].extendedIngredient;
   const analyzedInstructionsSteps =
     recipeDeepDetails[0].analyzedInstructions[0].steps;
-
-  console.log("analyzedInstructionsSteps:\n", analyzedInstructionsSteps);
+  const outputTasteArray = tasteArray;
+  const outputNutritionArray = nutritionArray;
 
   return (
     <div className="recipeDetails">
@@ -57,18 +58,24 @@ const RecipeDetails = ({ recipeDeepDetails }) => {
       </div>
 
       {/* Taste and nutrition graphs */}
-      <div className="row" style={{ marginTop: "30px", textAlign: "center" }}>
-        <div className="col-6">
-          <h4>Taste</h4>
-          {/* pieGraph component still to be coded */}
-        </div>
-        <div className="col-6">
-          <h4>Nutrition</h4>
-          {/* nutrition component still to be coded */}
-        </div>
+      {/* Taste */}
+      <div
+        className="row tasteNnutritionGroups"
+        style={{ marginTop: "30px", textAlign: "center" }}
+      >
+        <h4>Taste</h4>
+        <CompareTaste tasteArray={outputTasteArray} />
       </div>
 
-      {/* Ingredients */}
+      {/* Nutrition */}
+      <div
+        className="row tasteNnutritionGroups"
+        style={{ marginTop: "10px", textAlign: "center" }}
+      >
+        <h4>Nutrition</h4>
+        <CompareNutrition nutritionArray={outputNutritionArray} />
+      </div>
+
       {/* Ingredients */}
       <div className="row" style={{ marginTop: "30px" }}>
         <h4>Ingredients:</h4>
@@ -79,10 +86,9 @@ const RecipeDetails = ({ recipeDeepDetails }) => {
             {extendedIngredient.map((ingredient, index) => (
               <IngredientItem index={index} ingredient={ingredient} />
             ))}
-
-            <IngredientItem index={0} ingredient={extendedIngredient[0]} />
             <p style={{ textAlign: "center", marginTop: "17px" }}>The end</p>
           </div>
+          <div className="compCardFrameShadowOverlay"></div>
         </div>
       </div>
 
@@ -96,6 +102,7 @@ const RecipeDetails = ({ recipeDeepDetails }) => {
             ))}
             <p style={{ textAlign: "center", marginTop: "17px" }}>The end</p>
           </div>
+          <div className="compCardFrameShadowOverlay"></div>
         </div>
       </div>
     </div>

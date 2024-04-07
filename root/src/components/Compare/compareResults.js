@@ -37,13 +37,15 @@ const CompareResults = ({ recipes }) => {
   const [viewState, setViewState] = useState(false);
   const [viewStateBtn, setViewStateBtnTxt] = useState("View details");
   const [allDetailedRecipes, setAllDetailedRecipes] = useState([]);
+  const [tasteArray, setTasteArray] = useState([]);
+  const [nutritionArray, setNutritionArray] = useState([]);
 
   const recipeTitle = recipes.title;
   const recipeImage = recipes.imageUrl;
   const recipeTime = recipes.readyInMinutes;
   const recipeID = recipes.id;
 
-  // API call
+  // API call for getRecipeInformationByID
   async function getRecipeInformationByID() {
     const options = {
       method: "GET",
@@ -60,20 +62,72 @@ const CompareResults = ({ recipes }) => {
       const response = await axios.request(options);
       // If succesfull do this
       console.log("Response data from 2nd API call: \n", response.data[0]);
+
+      console.log("RAW API DATA:\n");
       const fetchedData = response.data.map((element) => ({
         healthScore: element.healthScore,
         servings: element.servings,
         pricePerServing: element.pricePerServing,
         extendedIngredient: element.extendedIngredients,
         analyzedInstructions: element.analyzedInstructions,
+        instructionsString: element.instructions,
+        id: element.id,
       }));
 
       console.log("FetchedDATA: \n", fetchedData);
+      console.log("getRecipeInformationByID CALLED");
 
-      setAllDetailedRecipes(fetchedData);
+      return fetchedData;
     } catch (error) {
       console.error(error);
       // If failed do this
+      return null;
+    }
+  }
+
+  // API call for getTasteInformationByID
+  async function getTasteInformationByID() {
+    const options = {
+      method: "GET",
+      url: `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/tasteWidget.json`,
+      params: { normalize: "false" },
+      headers: {
+        "X-RapidAPI-Key": "7a92345447mshd0df87618117100p1469ddjsn05b06500b351",
+        "X-RapidAPI-Host":
+          "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log("getTasteInformationByID CALLED");
+      console.log("TasteArray response:\n", response.data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+
+  async function getNutritionInfoByID() {
+    const options = {
+      method: "GET",
+      url: `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/nutritionWidget.json`,
+      headers: {
+        "X-RapidAPI-Key": "7a92345447mshd0df87618117100p1469ddjsn05b06500b351",
+        "X-RapidAPI-Host":
+          "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log("Nutrition data:\n", response.data);
+      console.log("Nutrition data nutrition:\n", response.data.nutrients);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return null;
     }
   }
 
@@ -86,15 +140,22 @@ const CompareResults = ({ recipes }) => {
       setHasError(false);
 
       setAllDetailedRecipes([]);
-      await getRecipeInformationByID();
+      const recipeInfo = await getRecipeInformationByID();
+      const tasteInfo = await getTasteInformationByID();
+      const nutritionInfo = await getNutritionInfoByID();
 
       console.log("AllDetailedRecipes array \n", allDetailedRecipes);
 
-      if (allDetailedRecipes.length > 0) {
+      if (recipeInfo && recipeInfo.length > 0) {
         // Sucessfull API CALL
         setIsLoading(false);
         setHasRecipeDetails(true);
         setHasError(false);
+
+        setAllDetailedRecipes(recipeInfo);
+        setTasteArray(tasteInfo);
+        setNutritionArray(nutritionInfo);
+
         // States
         setViewState(true);
         setViewStateBtnTxt("Hide details");
@@ -116,9 +177,21 @@ const CompareResults = ({ recipes }) => {
       setHasError(false);
 
       setViewState(false);
-      setViewStateBtnTxt("Hide details");
+      setViewStateBtnTxt("Show details");
     }
   };
+
+  let displayTime;
+
+  if (recipeTime >= 60) {
+    const hours = Math.floor(recipeTime / 60);
+    const minutes = recipeTime % 60;
+    displayTime = `${hours} hour${hours > 1 ? "s" : ""} ${minutes} minute${
+      minutes > 1 ? "s" : ""
+    }`;
+  } else {
+    displayTime = `${recipeTime} minute${recipeTime > 1 ? "s" : ""}`;
+  }
 
   // recipeID, recipeTitle, recipeImage, recipeTime
   return (
@@ -150,7 +223,7 @@ const CompareResults = ({ recipes }) => {
             >
               {/* readyInMinutes */}
               <h6 style={{ marginBottom: "5px" }} id="readyInTime">
-                Ready in <strong>{recipeTime}</strong> minutes
+                Ready in <strong>{displayTime}</strong>
               </h6>
               {/* title */}
               <h4 id="recipeTitle">{recipeTitle}</h4>
@@ -169,17 +242,18 @@ const CompareResults = ({ recipes }) => {
       </div>
 
       {/* Results */}
-      <div className="row" style={{ marginTop: "20px", marginBottom: "20px" }}>
+      <div className="row" style={{ marginTop: "20px", marginBottom: "15px" }}>
         {/* Display your recipe details here */}
         {hasRecipeDetails && (
-          <RecipeDetails recipeDeepDetails={allDetailedRecipes} />
+          <RecipeDetails
+            recipeDeepDetails={allDetailedRecipes}
+            tasteArray={tasteArray}
+            nutritionArray={nutritionArray}
+          />
         )}
         {hasError && <NotFoundElement errorMessage={errorCode} />}
         {isLoading && <LoadingElement />}
       </div>
-
-      {/* Recipe deep information - will appear when a user clicks the view button */}
-      {/* Recipe description */}
     </div>
   );
 };

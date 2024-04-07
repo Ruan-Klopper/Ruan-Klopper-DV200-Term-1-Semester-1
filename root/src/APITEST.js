@@ -39,8 +39,6 @@ async function getRecipeDetailsByName(recipeName, calls) {
   return outputData; // Return the output data
 }
 
-getRecipeDetailsByName("beef", 2);
-
 async function getRecipeInformationByID(id) {
   const options = {
     method: "GET",
@@ -62,8 +60,6 @@ async function getRecipeInformationByID(id) {
   }
 }
 
-getRecipeInformationByID(345);
-
 async function getRecipeInformationByID2(id) {
   const options = {
     method: "GET",
@@ -84,3 +80,24 @@ async function getRecipeInformationByID2(id) {
     // If failed do this
   }
 }
+
+const getTasteByID = async ({ recipeID }) => {
+  const options = {
+    method: "GET",
+    url: `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/tasteWidget.json`,
+    params: { normalize: "false" },
+    headers: {
+      "X-RapidAPI-Key": "7a92345447mshd0df87618117100p1469ddjsn05b06500b351",
+      "X-RapidAPI-Host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+getTasteByID({ recipeID: 67767 });
