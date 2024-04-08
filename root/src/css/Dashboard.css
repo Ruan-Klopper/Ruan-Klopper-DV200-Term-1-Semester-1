@@ -10,16 +10,11 @@
 
 .dashboardGroup {
   background-color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 13px;
-  padding-bottom: 3px;
   margin: 0 auto;
   border-radius: 20px;
 }
 
 .dashItems {
-  background-color: white;
   margin: 0 auto;
 }
 
@@ -27,7 +22,11 @@
 @media (min-width: 1920px) {
   /* desktop */
   .dashboardGroup {
-    width: 50%;
+    width: 55%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 40px;
+    padding-bottom: 50px;
   }
 }
 
@@ -35,6 +34,15 @@
   /* desktop */
   .dashboardGroup {
     width: 55%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 1919px) and (min-width: 1280px) {
+  /* desktop */
+  .dashboardGroup {
+    width: 70%;
+    padding: 30px;
   }
 }
 
@@ -42,6 +50,15 @@
   /* desktop */
   .dashboardGroup {
     width: 70%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  /* desktop */
+  .dashboardGroup {
+    width: 90%;
+    padding: 30px;
   }
 }
 
@@ -49,6 +66,7 @@
   /* tablet */
   .dashboardGroup {
     width: 75%;
+    padding: 30px;
   }
 }
 
@@ -56,5 +74,59 @@
   /* mobile */
   .dashboardGroup {
     width: 90%;
+    padding: 20px;
   }
+}
+
+.dashboardContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dashCard {
+  height: 300px;
+  width: 270px;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.dashCardSmall {
+  height: 250px;
+  width: 270px;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.dashCardAPIdesc {
+  background-color: #e27209;
+  color: #f2d249;
+  overflow-y: auto;
+  text-decoration: none;
+}
+
+/* Saved recipes container */
+.dashboardSavedRecipes {
+  padding: 15px;
+}
+
+.dashboardSavedRecipeItemContainer {
+  width: 100%;
+  height: 240px;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.dashboardSavedRecipeItem {
+  width: 100%;
+  background-color: white;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.dashboardSavedRecipeItemText {
+  padding-top: 12px;
+  padding-bottom: 10px;
+  padding-left: 15px;
 }

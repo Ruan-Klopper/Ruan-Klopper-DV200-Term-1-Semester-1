@@ -1,0 +1,195 @@
+/* Dashboard.css */
+
+/* Primary colours: */
+/* Yellow: F2D249 */
+/* Orange: E27209 */
+/* Red: B42828 */
+
+/* FONTS: */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Yanone+Kaffeesatz:wght@200..700&display=swap");
+
+.TimelineGroup {
+  margin: 0 auto;
+}
+
+.timelineLeft {
+  height: 600px;
+}
+
+.timeLineRight {
+  width: 900px;
+  height: 600px;
+  background-color: white;
+  -webkit-box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+}
+
+@media (max-width: 1920px) and (min-width: 1280px) {
+  /* desktop */
+  .TimelineGroup {
+    width: 1200px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .timelineLeft {
+    width: 270px;
+    margin-right: 30px;
+  }
+
+  .timeLineRight {
+    width: 900px;
+    height: 600px;
+    padding: 30px;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  /* small desktop */
+  .TimelineGroup {
+    width: 950px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .timelineLeft {
+    width: 270px;
+    margin-right: 30px;
+  }
+
+  .timeLineRight {
+    width: 650px;
+    height: 600px;
+    padding: 30px;
+    border-radius: 30px;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  /* tablet */
+  .TimelineGroup {
+    width: 755px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .timelineLeft {
+    width: 270px;
+    margin-right: 10px;
+  }
+
+  .timeLineRight {
+    width: 475px;
+    height: 600px;
+    padding: 20px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* mobile */
+  .TimelineGroup {
+    width: 350px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .timelineLeft {
+    width: 350px;
+    margin: 0 auto;
+  }
+
+  .timeLineRight {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 350px;
+    height: 600px;
+    padding: 10px;
+    border-radius: 15px;
+  }
+}
+
+/* Recipes control */
+.timelineRecipesControl {
+  width: 100%;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: #e27209;
+  color: #f2d249;
+  margin-bottom: 20px;
+
+  /* Shadow */
+  -webkit-box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+}
+
+/* saved recipes grouo */
+.timeCard {
+  height: 300px;
+  width: 100%;
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  color: #f2d249;
+
+  /* Shadow */
+  -webkit-box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0px 0px 11px 1px rgba(0, 0, 0, 0.55);
+}
+
+.timelineSavedRecipes {
+  padding: 15px;
+}
+
+.timelineSavedRecipeItemContainer {
+  width: 100%;
+  height: 240px;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+/* Saved recipe item */
+
+.timelineSavedRecipeItem {
+  width: 100%;
+  background-color: #f2d249;
+  color: #b42828;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.timelineSavedRecipeItemText {
+  padding-top: 12px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+}
+
+.timelineSavedRecipeItemPhoto {
+  width: 100px;
+  height: 125px;
+  background-color: white;
+  border-radius: 0px 10px 10px 0px;
+  background-size: cover;
+}
+
+.timelineSavedRecipeItemPhotoOverlay {
+  width: 100px;
+  height: 125px;
+  border-radius: 0px 10px 10px 0px;
+  background: rgb(242, 210, 73);
+  background: linear-gradient(
+    90deg,
+    rgba(242, 210, 73, 1) 10%,
+    rgba(242, 210, 73, 0) 100%
+  );
+}

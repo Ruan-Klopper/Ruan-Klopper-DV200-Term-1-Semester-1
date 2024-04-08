@@ -28,16 +28,38 @@ const GraphsError = ({ errorCode }) => {
 const CompareNutrition = ({ nutritionArray }) => {
   const nutritionData = nutritionArray;
 
-  const Calories = nutritionData.nutrients[0].percentOfDailyNeeds;
-  const Fat = nutritionData.nutrients[1].percentOfDailyNeeds;
-  const Carbohydrates = nutritionData.nutrients[3].percentOfDailyNeeds;
-  const Sugar = nutritionData.nutrients[5].percentOfDailyNeeds;
-  const Protein = nutritionData.nutrients[9].percentOfDailyNeeds;
-  const Fiber = nutritionData.nutrients[19].percentOfDailyNeeds;
-  const Sodium = nutritionData.nutrients[7].percentOfDailyNeeds;
-  const VitaminC = nutritionData.nutrients[10].percentOfDailyNeeds;
-  const Potassium = nutritionData.nutrients[12].percentOfDailyNeeds;
-  const Iron = nutritionData.nutrients[20].percentOfDailyNeeds;
+  const handleNullValue = (value) => {
+    return value !== null ? value : 0;
+  };
+
+  const Calories = handleNullValue(
+    nutritionData.nutrients[0]?.percentOfDailyNeeds
+  );
+  const Fat = handleNullValue(nutritionData.nutrients[1]?.percentOfDailyNeeds);
+  const Carbohydrates = handleNullValue(
+    nutritionData.nutrients[3]?.percentOfDailyNeeds
+  );
+  const Sugar = handleNullValue(
+    nutritionData.nutrients[5]?.percentOfDailyNeeds
+  );
+  const Protein = handleNullValue(
+    nutritionData.nutrients[9]?.percentOfDailyNeeds
+  );
+  const Fiber = handleNullValue(
+    nutritionData.nutrients[19]?.percentOfDailyNeeds
+  );
+  const Sodium = handleNullValue(
+    nutritionData.nutrients[7]?.percentOfDailyNeeds
+  );
+  const VitaminC = handleNullValue(
+    nutritionData.nutrients[10]?.percentOfDailyNeeds
+  );
+  const Potassium = handleNullValue(
+    nutritionData.nutrients[12]?.percentOfDailyNeeds
+  );
+  const Iron = handleNullValue(
+    nutritionData.nutrients[20]?.percentOfDailyNeeds
+  );
 
   const data = {
     labels: [

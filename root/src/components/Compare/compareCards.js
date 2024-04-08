@@ -108,12 +108,13 @@ const CompareCard = () => {
       // Save recipes to ALLRECIPES ARRAY
       console.log("API OUTPUT:");
       console.log(fetchedRecipes);
-      setAllRecipes(await fetchedRecipes);
+      return fetchedRecipes;
+
       success = true;
     } catch (error) {
       console.error("ERROR: " + error);
       success = false;
-      setErrorCode("Seems like we can't find that recipe - Error code:", error);
+      return null;
     }
   }
 
@@ -124,17 +125,17 @@ const CompareCard = () => {
     setHasError(false);
 
     setAllRecipes([]);
-    await getRecipeDetailsByName(recipeName, 10);
+    const recipeInfo = await getRecipeDetailsByName(recipeName, 10);
 
     console.log("Recipe name trying to seach for:" + recipeName);
     console.log("Is the API call successful?\n" + success);
     console.log("All recipes output\n", allRecipes);
 
-    if (allRecipes.length > 0) {
+    if (recipeInfo.length > 0) {
       // Load recipes
       setCounter(0);
-      setTotalCount(allRecipes.length);
-
+      setTotalCount(recipeInfo.length);
+      setAllRecipes(recipeInfo);
       // State for adding a recipe element
       setIsLoading(false);
       setHasRecipes(true);

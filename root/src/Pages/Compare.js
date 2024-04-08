@@ -3,6 +3,7 @@ import React from "react";
 
 // CSS
 import "../css/global.css";
+import "../css/Compare.css";
 
 // Bootstrap compoments
 import Container from "react-bootstrap/Container";

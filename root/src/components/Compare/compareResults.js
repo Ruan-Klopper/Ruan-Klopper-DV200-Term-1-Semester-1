@@ -61,9 +61,11 @@ const CompareResults = ({ recipes }) => {
     try {
       const response = await axios.request(options);
       // If succesfull do this
-      console.log("Response data from 2nd API call: \n", response.data[0]);
+      console.log(
+        "Response data from RecipeInfo API call: \n",
+        response.data[0]
+      );
 
-      console.log("RAW API DATA:\n");
       const fetchedData = response.data.map((element) => ({
         healthScore: element.healthScore,
         servings: element.servings,
@@ -72,10 +74,13 @@ const CompareResults = ({ recipes }) => {
         analyzedInstructions: element.analyzedInstructions,
         instructionsString: element.instructions,
         id: element.id,
+        title: element.title,
+        imageURL: element.image,
+        recipeInstructions: element.instructions,
       }));
 
-      console.log("FetchedDATA: \n", fetchedData);
       console.log("getRecipeInformationByID CALLED");
+      console.log("Recipeinformation response: \n", fetchedData);
 
       return fetchedData;
     } catch (error) {
@@ -109,6 +114,7 @@ const CompareResults = ({ recipes }) => {
     }
   }
 
+  // API call for getNutritionInfoByID
   async function getNutritionInfoByID() {
     const options = {
       method: "GET",
@@ -122,6 +128,7 @@ const CompareResults = ({ recipes }) => {
 
     try {
       const response = await axios.request(options);
+      console.log("getNutritionInfoByID CALLED");
       console.log("Nutrition data:\n", response.data);
       console.log("Nutrition data nutrition:\n", response.data.nutrients);
       return response.data;
@@ -181,8 +188,8 @@ const CompareResults = ({ recipes }) => {
     }
   };
 
+  // Format the time for readyInMinutes
   let displayTime;
-
   if (recipeTime >= 60) {
     const hours = Math.floor(recipeTime / 60);
     const minutes = recipeTime % 60;
