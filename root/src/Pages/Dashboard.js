@@ -46,17 +46,28 @@ const DashAPIdescription = () => {
 
 const DashboardCredits = () => {
   return (
-    <div className="dashCardSmall" style={{ backgroundColor: "#F5F5F5" }}>
-      <h5>Credits</h5>
-      <p>
+    <div
+      className="dashCardSmall"
+      style={{ backgroundColor: "#F5F5F5", padding: "15px" }}
+    >
+      <h4
+        style={{
+          marginBottom: "15px",
+          textAlign: "center",
+          fontWeight: "bold",
+        }}
+      >
+        Credits
+      </h4>
+      <p style={{ marginBottom: "0px" }}>
         Application built with React.js, Charts.js, AXIOS, HTML 5, CSS and
         JavaScript.
       </p>
-      <p>API: Recipe Food Nutrition API </p>
-      <p>Coded and developed by:</p>
-      <p>Ruan Klopper 231280</p>
-      <p>Interactive Development 200 Term 1</p>
-      <p>Date of submission: 7 April 2024</p>
+      <p style={{ marginBottom: "10px" }}>API: Recipe Food Nutrition API </p>
+      <h5 style={{ marginBottom: "0px" }}>Coded and developed by:</h5>
+      <p style={{ marginBottom: "0px" }}>Ruan Klopper 231280</p>
+      <p style={{ marginBottom: "0px" }}>Interactive Development 200 Term 1</p>
+      <p style={{ marginBottom: "0px" }}>Date of submission: 7 April 2024</p>
     </div>
   );
 };
@@ -69,8 +80,8 @@ const SavedRecipeItem = ({
   recipeImage,
 }) => {
   return (
-    <div className="timelineSavedRecipeItem">
-      <div className="timelineSavedRecipeItemText">
+    <div className="dashboardSavedRecipeItem">
+      <div className="dashboardSavedRecipeItemText">
         <p style={{ marginBottom: "5px", fontWeight: "bold" }}>
           No. {recipeNo}
         </p>
@@ -81,10 +92,10 @@ const SavedRecipeItem = ({
         <p style={{ marginBottom: "3px" }}>Price per serving: {recipePPS}</p>
       </div>
       <div
-        className="timelineSavedRecipeItemPhoto"
+        className="dashboardSavedRecipeItemPhoto"
         style={{ backgroundImage: `url(${recipeImage})` }}
       >
-        <div className="timelineSavedRecipeItemPhotoOverlay"></div>
+        <div className="dashboardSavedRecipeItemPhotoOverlay"></div>
       </div>
     </div>
   );
@@ -92,9 +103,9 @@ const SavedRecipeItem = ({
 
 const NoSavedRecipeItem = () => {
   return (
-    <div className="timelineSavedRecipeItem">
+    <div className="dashboardSavedRecipeItem">
       <div
-        className="timelineSavedRecipeItemText"
+        className="dashboardSavedRecipeItemText"
         style={{ paddingRight: "15px" }}
       >
         <h5 style={{ marginBottom: "5px", fontWeight: "bold" }}>
@@ -119,7 +130,7 @@ const DashboardSavedRecipes = () => {
     return (
       <div
         className="dashCard dashboardSavedRecipes"
-        style={{ backgroundColor: "#E27209" }}
+        style={{ backgroundColor: "#E6E6E6" }}
       >
         <h5 style={{ textAlign: "center" }}>All saved recipes</h5>
         <div className="dashboardSavedRecipeItemContainer">
@@ -147,21 +158,27 @@ const Dashboard = () => {
       <NavBar webPage={"Dashboard"} />
 
       <div class="dashboardGroup">
-        <h2 style={{ fontSize: "30px", marginBottom: "20px" }}>
+        <h2
+          style={{
+            fontSize: "30px",
+            marginBottom: "20px",
+            textAlign: "center",
+          }}
+        >
           Your dashboard
         </h2>
 
-        <div class="row d">
-          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
+        <div class="row">
+          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-center">
             <DashAPIdescription />
           </div>
-          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
+          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-center">
             <DashRecentRecipe />
           </div>
-          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
-            <DashSavedRecipe />
+          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-center">
+            <DashboardSavedRecipes />
           </div>
-          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-centre">
+          <div class="dashItems col-xs-12 col-sm-6 col-md-6 col-lg-4 justify-content-center">
             <DashboardCredits />
           </div>
         </div>
